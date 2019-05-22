@@ -1,5 +1,5 @@
 // from data.js
-// assign to arry
+// assign to array
 var tableData = data;
 
 //create function
@@ -18,13 +18,21 @@ function buttonclick(event){
     // prevent page from refreshing
     d3.event.preventDefault()
     
+    //remove table body
     d3.selectAll("tbody tr").remove()
+    //declare variable
     ufoDate = d3.select("#datetime").node().value
-    buildtable(tableData.filter(function(element){return ufoDate===element.datetime}))
+    //if ufo is blank, show table
+    if (ufoDate ==="") {
+        buildtable(tableData)
+    }
+    else{
+       //filter based on datetime
+        buildtable(tableData.filter(function(element){return ufoDate===element.datetime}))
+    }
     console.log(ufoDate)
 }
-
-// YOUR CODE HERE!
+// select on button click
 d3.selectAll("#filter-btn").on("click",buttonclick);
 
 buildtable(tableData)
